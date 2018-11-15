@@ -2,35 +2,42 @@
 <template>
   <div class='hello'>
     <h1>{{msg}}</h1>
-    <img src="@/assets/logo.png">
+    <img src='@/assets/logo.png'>
     <h2>The first try form Cheky with Vrma</h2>
     <ul>
-      <router-link to="/vue-el-table" tag="li">VueElTable</router-link>
-      <router-link to="/vue-el-tab" tag="li">VueElTab</router-link>
+      <router-link to='/vue-el-table'
+                   tag='li'>VueElTable</router-link>
+      <router-link to='/vue-el-tab'
+                   tag='li'>VueElTab</router-link>
       <li>
-        <a href='https://forum.vuejs.org' target='_blank'>
+        <a href='https://forum.vuejs.org'
+           target='_blank'>
           VueElForm
         </a>
       </li>
       <li>
-        <a href='https://twitter.com/vuejs' target='_blank'>
+        <a href='https://twitter.com/vuejs'
+           target='_blank'>
           VueElTree
         </a>
       </li>
     </ul>
     <ul>
       <li>
-        <a href='http://router.vuejs.org/' target='_blank'>
+        <a href='http://router.vuejs.org/'
+           target='_blank'>
           VueElDatePicker
         </a>
       </li>
       <li>
-        <a href='http://vuex.vuejs.org/' target='_blank'>
+        <a href='http://vuex.vuejs.org/'
+           target='_blank'>
           VueElMessage
         </a>
       </li>
       <li>
-        <a href='http://vue-loader.vuejs.org/' target='_blank'>
+        <a href='http://vue-loader.vuejs.org/'
+           target='_blank'>
           VueElNav
         </a>
       </li>
@@ -40,13 +47,13 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   data() {
     return {
-      msg: "Vue Element"
-    };
+      msg: 'Vue Element'
+    }
   }
-};
+}
 </script>
 
 <style scoped>

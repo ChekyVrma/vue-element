@@ -5,14 +5,13 @@
 
 <script>
 export default {
-  name: "VueEl",
+  name: 'VueEl',
   data() {
-    return {};
+    return {}
   }
-};
+}
 </script>
 
 <style scoped>
-
 </style>
 
