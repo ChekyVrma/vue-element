@@ -10,7 +10,7 @@ export default new Router({
     {
       path: '/',
       name: 'Dashboard',
-      component: () => import('./components/Dashboard/index.vue')
+      component: () => import('./views/Dashboard/index.vue')
     },
     {
       path: '/vue-el-table',
