@@ -6,47 +6,55 @@
 
     </div>
     <!--工具栏-->
-    <div class='operate-container'>
-
-    </div>
+    <vue-el-toolbar :options='toolbarOptions'></vue-el-toolbar>
     <!-- 数据栏 -->
     <div class='data-container'>
 
     </div>
     <!-- 分页栏 -->
-    <vue-el-pagination :options='options'
+    <vue-el-pagination :options='paginationOptions'
                        @sizeChangeWatch='sizeChangeReceive'
                        @currentChangeWatch='currentChangeReceive'></vue-el-pagination>
   </div>
 </template>
 <script>
 import VueElPagination from './lib/VueElPagination'
+import VueElToolbar from './lib/VueElToolbar'
 export default {
   name: 'VueElTable',
   components: {
-    VueElPagination
+    VueElPagination,
+    VueElToolbar
   },
-  data() {
+  data () {
     return {
-      options: {
-        type: Object,
-        default: {
-          // 添加按钮
-          add: {
-            label: '添加',
-            show: true,
-            disabled: false,
-            handle: () => {}
-          },
-          // 批量删除按钮
-          delete: {
-            label: '批量删除',
-            show: true,
-            disabled: false,
-            handle: () => {}
-          }
-        }
+      paginationOptions: {
+        page: 1, // 当前页
+        size: 10, // 每页条数
+        total: 1 // 总页数
       },
+
+      toolbarOptions: [
+        {
+          // 添加按钮
+          label: '添加',
+          show: true,
+          disabled: false,
+          type: 'primary',
+          icon: 'el-icon-circle-plus-outline',
+          handle: () => { }
+        },
+        {
+          // 批量删除按钮
+          label: '批量删除',
+          show: true,
+          disabled: false,
+          type: 'danger',
+          icon: 'el-icon-remove-outline',
+          handle: () => { }
+        }
+      ],
+
       tableData: [
         {
           date: '2016-05-02',
@@ -73,14 +81,16 @@ export default {
   },
   methods: {
     // 每页条数改变时回调函数
-    sizeChangeReceive(val) {},
+    sizeChangeReceive (val) { },
 
     // 每页条数改变时回调函数
-    currentChangeReceive(val) {}
+    currentChangeReceive (val) { }
   }
 }
 </script>
 
 <style>
+.app-container {
+  height: 100%;
+}
 </style>
-

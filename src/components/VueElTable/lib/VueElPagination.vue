@@ -17,29 +17,29 @@ export default {
   props: {
     options: {
       type: Object,
-      default: {
-        page: 1, // 当前页
-        size: 10, // 每页条数
-        total: 1 // 总页数
+      default () {
+        return {
+          page: 1, // 当前页
+          size: 10, // 每页条数
+          total: 1 // 总页数
+        }
       }
     }
   },
-  data() {
+  data () {
     return {}
   },
   methods: {
     // 每页条数改变时操作
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.$emit('sizeChangeWatch', val)
     },
     // 当前页改变时操作
-    handleCurrentChange() {
+    handleCurrentChange () {
       this.$emit('currentChangeWatch', val)
     }
   }
 }
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>

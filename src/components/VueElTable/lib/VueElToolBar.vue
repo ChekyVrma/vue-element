@@ -1,48 +1,50 @@
 <!-- 工具栏 -->
 <template>
-  <el-row>
-    <el-button type='primary'
-               icon='el-icon-circle-plus-outline'
-               @click='options.add.handle'
-               :disabled='disabled'>{{options.add.label}}</el-button>
-
-    <el-button type='danger'
-               icon='el-icon-remove-outline'
-               @click='options.delete.handle'
-               :disabled='disabled'>{{options.delete.label}}</el-button>
+  <el-row align='left'>
+    <el-button v-for='(item) in options'
+               :key='item.id'
+               :type='item.type'
+               :icon='item.icon'
+               @click='item.handle'
+               :disabled='item.disabled'>{{item.label}}
+    </el-button>
   </el-row>
 </template>
 
 <script>
 export default {
-  name: 'VueElToolBar',
+  name: 'VueElToolbar',
   props: {
     options: {
-      type: Object,
-      default: {
-        // 添加按钮
-        add: {
-          label: '添加',
-          show: true,
-          disabled: false,
-          // handle: () => {}
-        },
-        // 批量删除按钮
-        delete: {
-          label: '批量删除',
-          show: true,
-          disabled: false,
-          // handle: () => {}
-        }
+      type: Array,
+      default () {
+        return [
+          {
+            // 添加按钮
+            label: '添加',
+            show: true,
+            disabled: false,
+            type: 'primary',
+            icon: 'el-icon-circle-plus-outline',
+            handle: () => { }
+          },
+          {
+            // 批量删除按钮
+            label: '批量删除',
+            show: true,
+            disabled: false,
+            type: 'danger',
+            icon: 'el-icon-remove-outline',
+            handle: () => { }
+          }
+        ]
       }
     }
   },
-  data() {
+  data () {
     return {}
   }
 }
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>
