@@ -1,7 +1,7 @@
 <!-- 工具栏 -->
 <template>
   <el-row>
-    <el-button v-for='(item) in options'
+    <el-button v-for='(item) in distOptions'
                :key='item.id'
                :type='item.type'
                :icon='item.icon'
@@ -41,8 +41,42 @@ export default {
       }
     }
   },
+
+  mounted () {
+    debugger
+    this.distOptions = Object.assign(this.distOptions, this.options)
+  },
+
+  // watch: {
+  //   options: function (newVal, oldVal) {
+  //     debugger
+  //     this.distOptions = Object.assign(this.distOptions, newVal) // 初始化表单
+  //   }
+  // },
+
   data () {
-    return {}
+    return {
+      distOptions: [
+        {
+          // 添加按钮
+          label: '添加',
+          show: true,
+          disabled: false,
+          type: 'primary',
+          icon: 'el-icon-circle-plus-outline',
+          handle: () => { }
+        },
+        {
+          // 批量删除按钮
+          label: '批量删除',
+          show: true,
+          disabled: false,
+          type: 'danger',
+          icon: 'el-icon-remove-outline',
+          handle: () => { }
+        }
+      ]
+    }
   }
 }
 </script>
