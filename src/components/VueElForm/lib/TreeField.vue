@@ -3,10 +3,10 @@
   <div class="field-tree">
     <!-- 指令引用要先声明 -->
     <el-popover ref="popover" :width="popWidth" transition="el-zoom-in-top">
-      <base-tree
-        ref="tree"
-        :options="options"
-        v-model="val"
+      <base-tree 
+        ref="tree" 
+        :options="options" 
+        v-model="val" 
         :style="popoverStyle"
       ></base-tree>
     </el-popover>

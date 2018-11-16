@@ -7,8 +7,7 @@
     :text-color="options['text-color']"
     :fill="options['fill']"
 
-    @change="_change"
-
+    @change.native="_change"
     ref="checkbox"
     v-model="val"
   >
@@ -28,7 +27,7 @@
         :indeterminate="checkbox['indeterminate']"
       >{{checkbox['text']}}</el-checkbox>
     </template>
-
+    
     <template v-else>
       <el-checkbox-button
         v-for="button in options['checkbox-buttons']"

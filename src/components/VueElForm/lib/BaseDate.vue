@@ -20,10 +20,9 @@
     :name="options['name']"
     :unlink-panels="options['unlink-panels']"
 
-    @change="_change"
     @blur="_blur"
     @focus="_focus"
-
+    
     ref="date"
     v-model="val"
   ></el-date-picker>

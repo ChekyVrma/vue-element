@@ -15,9 +15,10 @@
       ref="form"
       :model="values"
     >
+
       <el-row v-for="(row, i) in layout" :key="i">
         <el-col v-for="(field, j) in row" :key="j" :span="span(field)">
-          <el-form-item
+          <el-form-item 
             :prop="field['prop']"
             :label="field['label']"
             :label-width="field['label-width']"
@@ -30,10 +31,10 @@
 
             v-if="field"
           >
-            <component
-              :is=" field.type +'-field'"
-              v-model="values[field.prop]"
-              :options="field.options"
+            <component 
+              :is=" field.type +'-field'" 
+              v-model="values[field.prop]" 
+              :options="field.options" 
               :style="fieldStyle(field)"
             ></component>
 
@@ -43,10 +44,10 @@
     </el-form>
 
     <div class="form-btns" :style="btnsStyle">
-      <el-button
+      <el-button 
         v-for="button in buttons"
         :key="button['text']"
-
+        
         :size="button['size']"
         :type="button['type']"
         :plain="button['plain']"
@@ -57,7 +58,7 @@
         :autofocus="button['autofocus']"
         :native-type="button['native-type']"
 
-        @click="events(button['event'])"
+        @click.native="button['click'](values)"
       >{{button['text']}}</el-button>
     </div>
 
@@ -66,7 +67,7 @@
 
 <script>
 
-import ENV from '../utils/env'
+import ENV from './utils/env'
 
 // 强制依赖element-ui
 // import Vue from 'vue'
@@ -87,27 +88,32 @@ export default {
     DateField: () => import('./lib/DateField'),
     TreeField: () => import('./lib/TreeField'),
     UploadField: () => import('./lib/UploadField'),
-    EditorField: () => import('./lib/EditorField')
+    EditorField: () => import('./lib/EditorField'),
+    TipTitle: () => import('./lib/TipTitle')
   },
-  props: ['config'],
+  props: ['config','value'],
   data () {
     return {
-      values: {}
+      values: {},
+      getValues:{}
     }
   },
   created () {
     let setValues = this.config.values || {}
-    let getValues = {}
+    let getValues = this.getValues
     const _ENV = ENV
 
     // 初始化values.key
     this.config.fields.forEach((field, i) => {
-      if (!field.prop && !field.type) {
-        throw Error('field name || type 是必填的')
+      if (!field.prop) {
+        throw Error('field name 是必填的')
       } else if (getValues[field.prop]) {
         throw Error('field.prop: ' + field.prop + ' 重复')
       } else {
         getValues[field.prop] = ''
+      }
+      if(!field.type){
+        field.type='input'
       }
     })
 
@@ -129,8 +135,31 @@ export default {
       }
     })
 
-    this.values = Object.assign(getValues, setValues)
+    this.values =this.config.values //Object.assign(getValues, setValues)
   },
+  // watch:{
+  //   'config.values'(newValue,oldValue){
+  //     let setValues = this.config.values || {}
+  //     // 动态默认值
+  //   Object.keys(setValues).forEach(key => {
+  //     let value = setValues[key]
+  //     if (value && value[0] === '#') {
+  //       let indexs = value.substring(1).split('.')
+  //       let _value = _ENV
+  //       indexs.some(index => {
+  //         if (_value[index]) {
+  //           _value = _value[index]
+  //         } else {
+  //           _value = ''
+  //           return true
+  //         }
+  //       })
+  //       setValues[key] = _value
+  //     }
+  //   })
+  //   this.values = Object.assign(this.getValues, setValues)
+  //   }
+  // },
   computed: {
     form () {
       return this.$refs['form']

@@ -1,7 +1,7 @@
 <template>
   <quill-editor
     :options="options"
-
+    
     :blur="_blur"
     :focus="_focus"
     :ready="_ready"
