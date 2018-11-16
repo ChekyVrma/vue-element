@@ -12,7 +12,7 @@
     :inactive-color="options['inactive-color']"
     :name="options['name']"
 
-    @change="_change"
+    @change.native="_change"
 
     v-model="val"
   >

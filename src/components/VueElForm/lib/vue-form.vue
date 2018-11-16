@@ -17,7 +17,7 @@
     >
       <el-row v-for="(row, i) in layout" :key="i">
         <el-col v-for="(field, j) in row" :key="j" :span="span(field)">
-          <el-form-item
+          <el-form-item 
             :prop="field['prop']"
             :label="field['label']"
             :label-width="field['label-width']"
@@ -30,10 +30,10 @@
 
             v-if="field"
           >
-            <component
-              :is="'field-' + field.type"
-              v-model="values[field.prop]"
-              :options="field.options"
+            <component 
+              :is="'field-' + field.type" 
+              v-model="values[field.prop]" 
+              :options="field.options" 
               :style="fieldStyle(field)"
             ></component>
 
@@ -43,7 +43,7 @@
     </el-form>
 
     <div class="form-btns" :style="btnsStyle">
-      <el-button
+      <el-button 
         v-for="button in buttons"
         :key="button['text']"
 

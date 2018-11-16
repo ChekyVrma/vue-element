@@ -1,14 +1,14 @@
 <template>
   <base-upload :options="options" v-model="val">
     <i v-if="options['list-type'] === 'picture-card'" class="el-icon-plus" slot="button"></i>
-    <el-button
+    <el-button 
       v-else
       class="upload-button"
       slot="button"
 
-      :size="button.size"
-      :type="button.type"
-      :icon="button.icon"
+      :size="button.size" 
+      :type="button.type" 
+      :icon="button.icon" 
     >{{button.text}}</el-button>
     <span class="upload-tip el-upload__tip" v-if="options.tip" slot="tip">{{options.tip}}</span>
   </base-upload>
@@ -91,3 +91,4 @@ export default {
     margin-left: 12px;
   }
 </style>
+

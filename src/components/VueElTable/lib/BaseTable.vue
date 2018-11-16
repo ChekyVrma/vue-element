@@ -46,6 +46,7 @@
 export default {
   name: 'BaseTable',
   props: {
+    api:{type:Function},
     options: {
       type: Object,
       default () {
@@ -120,6 +121,7 @@ export default {
         }
       }
     }
+
   },
   data () {
     return {}

@@ -21,14 +21,14 @@
     :form="options['form']"
     :label="options['label']"
 
-    @blur="_blur"
-    @focus="_focus"
-    @change="_change"
+    @blur.native="_blur"
+    @focus.native="_focus"
+    @change.native="_change"
 
     ref="input"
     v-model="val"
   >
-
+      
     <!-- 插槽封装 这里插槽即作为引用组件el-input的内容(slot=“”) 又作为当前组件的插槽容器(<slot name="" />) -->
     <slot name="prefix" slot="prefix"></slot>
     <slot name="suffix" slot="suffix"></slot>
@@ -77,3 +77,4 @@ export default {
   }
 }
 </script>
+

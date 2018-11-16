@@ -5,7 +5,7 @@
     :text-color="options['text-color']"
     :fill="options['fill']"
 
-    @change="_change"
+    @change.native="_change"
 
     ref="radio"
     v-model="val"

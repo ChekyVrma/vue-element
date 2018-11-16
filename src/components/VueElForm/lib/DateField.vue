@@ -1,10 +1,10 @@
 <template>
-  <base-date :options="options" v-model="val"></base-date>
+  <base-date :options="options" v-model="val" @change="options['change']"></base-date>
 </template>
 
 <script>
 
-import BaseDate from './base-date'
+import BaseDate from './BaseDate'
 
 export default {
   components: { BaseDate },
@@ -53,6 +53,9 @@ export default {
         this.$emit('input', time)
       }
     }
+  },
+  methods:{
+
   }
 }
 </script>

@@ -24,19 +24,19 @@
     :reserve-keyword="options['reserve-keyword']"
     :default-first-option="options['default-first-option']"
 
-    @change="_change"
+    @change.native="_change"
     @visible-change="this['_visible-change']"
     @remove-tag="this['_remove-tag']"
-    @clear="_clear"
-    @blur="_blur"
+    @clear.native="_clear"
+    @blur.native="_blur"
 
     ref="select"
     v-model="val"
   >
     <!-- options优先级比group高 -->
     <template v-if="options['options']">
-      <el-option
-        v-for="option in options['options']"
+      <el-option 
+        v-for="option in options['options']" 
         :key="option['value']"
         :label="option['label']"
         :value="option['value']"
@@ -44,15 +44,15 @@
     </template>
 
     <template v-else>
-      <el-option-group
-        v-if="options['options-group']"
-        v-for="group in options['options-group']"
+      <el-option-group 
+        v-if="options['options-group']" 
+        v-for="group in options['options-group']" 
         :key="group['label']"
         :label="group['label']"
         :disabled="group['disabled']"
       >
-        <el-option
-          v-for="option in group['options']"
+        <el-option 
+          v-for="option in group['options']" 
           :key="option['value']"
           :label="option['label']"
           :value="option['value']"
@@ -61,7 +61,7 @@
     </template>
 
   </el-select>
-
+  
 </template>
 
 <script>
