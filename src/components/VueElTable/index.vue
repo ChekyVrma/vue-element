@@ -1,30 +1,33 @@
 <!-- 数据栏 -->
 <template>
   <div class='app-container'>
-    <!--筛选栏-->
-    <div class='filter-container'>
-
-    </div>
+    <!--搜索栏-->
+    <base-search></base-search>
     <!--工具栏-->
-    <vue-el-toolbar :options='toolbarOptions'></vue-el-toolbar>
+    <base-toolbar></base-toolbar>
     <!-- 数据栏 -->
-    <div class='data-container'>
-
-    </div>
+    <base-table @selectionChangeWatch="selectionChangeReceive"></base-table>
     <!-- 分页栏 -->
-    <vue-el-pagination :options='paginationOptions'
+    <div class='pagination-container'>
+      <base-pagination :options='paginationOptions'
                        @sizeChangeWatch='sizeChangeReceive'
-                       @currentChangeWatch='currentChangeReceive'></vue-el-pagination>
+                       @currentChangeWatch='currentChangeReceive'></base-pagination>
+    </div>
   </div>
 </template>
 <script>
-import VueElPagination from './lib/VueElPagination'
-import VueElToolbar from './lib/VueElToolbar'
+import BasePagination from './lib/BasePagination'
+import BaseToolbar from './lib/BaseToolbar'
+import BaseTable from './lib/BaseTable'
+import BaseSearch from './lib/BaseSearch'
+
 export default {
   name: 'VueElTable',
   components: {
-    VueElPagination,
-    VueElToolbar
+    BasePagination,
+    BaseToolbar,
+    BaseTable,
+    BaseSearch
   },
   data () {
     return {
@@ -35,62 +38,26 @@ export default {
       },
 
       toolbarOptions: [
-        {
-          // 添加按钮
-          label: '添加',
-          show: true,
-          disabled: false,
-          type: 'primary',
-          icon: 'el-icon-circle-plus-outline',
-          handle: () => { }
-        },
-        {
-          // 批量删除按钮
-          label: '批量删除',
-          show: true,
-          disabled: false,
-          type: 'danger',
-          icon: 'el-icon-remove-outline',
-          handle: () => { }
-        }
-      ],
-
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
       ]
     }
   },
   methods: {
-    // 每页条数改变时回调函数
+    // 当每页条数改变时会触发该事件
     sizeChangeReceive (val) { },
 
-    // 每页条数改变时回调函数
-    currentChangeReceive (val) { }
+    // 当每页条数改变时会触发该事件
+    currentChangeReceive (val) { },
+
+    // 当选择项发生变化时会触发该事件
+    selectionChangeReceive (selection) { }
   }
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
 .app-container {
-  height: 100%;
+  .pagination-container {
+    text-align: center;
+  }
 }
 </style>

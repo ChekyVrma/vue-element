@@ -1,6 +1,6 @@
 <!-- 工具栏 -->
 <template>
-  <el-row align='left'>
+  <el-row>
     <el-button v-for='(item) in options'
                :key='item.id'
                :type='item.type'
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'VueElToolbar',
+  name: 'BaseToolbar',
   props: {
     options: {
       type: Array,
@@ -47,4 +47,4 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style></style>

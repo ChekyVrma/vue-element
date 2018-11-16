@@ -7,13 +7,13 @@
                  :page-sizes='[10,20,30,50]'
                  background
                  layout='total, sizes, prev, pager, next, jumper'
-                 @size-change='handleSizeChange'
+                 @size-change='handlesizeChange'
                  @current-change='handleCurrentChange' />
 </template>
 
 <script>
 export default {
-  name: 'VueElPagination',
+  name: 'BasePagination',
   props: {
     options: {
       type: Object,
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     // 每页条数改变时操作
-    handleSizeChange (val) {
+    handlesizeChange (val) {
       this.$emit('sizeChangeWatch', val)
     },
     // 当前页改变时操作
@@ -42,4 +42,5 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style>
+</style>
