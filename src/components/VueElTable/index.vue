@@ -24,7 +24,7 @@ import BasePagination from './lib/BasePagination'
 import BaseToolbar from './lib/BaseToolbar'
 import BaseTable from './lib/BaseTable'
 import BaseSearch from './lib/BaseSearch'
-
+import water from './commons/api/water'
 export default {
   name: 'VueElTable',
   components: {

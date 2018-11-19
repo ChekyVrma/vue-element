@@ -22,8 +22,7 @@ export default {
 
 <style>
 .log-row {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 .row-tip{
   margin-bottom: 1rem;
