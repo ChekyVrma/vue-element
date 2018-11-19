@@ -1,21 +1,21 @@
 <!-- 分页栏 -->
 <template>
-  <el-pagination v-show='options.total>0'
-                 :current-page='options.page'
-                 :page-size='options.size'
-                 :total='options.total'
+  <el-pagination v-show='configs.total>0'
+                 :current-page='configs.page'
+                 :page-size='configs.size'
+                 :total='configs.total'
                  :page-sizes='[10,20,30,50]'
                  background
                  layout='total, sizes, prev, pager, next, jumper'
-                 @size-change='handlesizeChange'
-                 @current-change='handleCurrentChange' />
+                 @size-change='configs.handleSizeChange'
+                 @current-change='configs.handleCurrentChange' />
 </template>
 
 <script>
 export default {
   name: 'BasePagination',
   props: {
-    options: {
+    configs: {
       type: Object,
       default () {
         return {
@@ -30,14 +30,6 @@ export default {
     return {}
   },
   methods: {
-    // 每页条数改变时操作
-    handlesizeChange (val) {
-      this.$emit('sizeChangeWatch', val)
-    },
-    // 当前页改变时操作
-    handleCurrentChange () {
-      this.$emit('currentChangeWatch', val)
-    }
   }
 }
 </script>

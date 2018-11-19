@@ -42,6 +42,9 @@
         </a>
       </li>
     </ul>
+    <h2>Test</h2>
+    <router-link to='/test/vue-el-tab'
+                 tag='li'>TestVueElTable</router-link>
   </div>
 </template>
 

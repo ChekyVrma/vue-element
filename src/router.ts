@@ -21,6 +21,11 @@ export default new Router({
       path: '/vue-el-tab',
       name: 'VueElTab',
       component: () => import('./components/VueElTab/index.vue')
+    },
+    {
+      path: '/test/vue-el-tab',
+      name: 'TestVueElTable',
+      component: () => import('./views/test/TestVueElTable.vue')
     }
   ]
 })

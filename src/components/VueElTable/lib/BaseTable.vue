@@ -1,37 +1,43 @@
 <!-- 表格数据 -->
 <template>
-  <el-table :data='options.tableData'
-            :border='options.border'
-            :max-height='options.maxHeight'
-            :size='options.size'
-            :highlight-current-row='options.highlightCurrentRow'
-            @selection-change="selection => emitEventHandler('selectionChangeWatch', selection)">
+  <el-table :data='tableData'
+            :border='configs.border'
+            :max-height='configs.maxHeight'
+            :size='configs.size'
+            :highlight-current-row='configs.highlightCurrentRow'
+            @selection-change="configs.selection.handle">
     <el-table-column type='selection'
-                     v-show='options.index.show'
-                     :width='options.selection.width'
-                     :align='options.selection.align'>
+                     v-show='configs.index.show'
+                     :width='configs.selection.width'
+                     :align='configs.selection.align'>
     </el-table-column>
     <el-table-column type='index'
-                     v-show='options.index.show'
-                     :label='options.index.label'
-                     :width='options.index.width'
-                     :align='options.index.align'>
+                     v-show='configs.index.show'
+                     :label='configs.index.label'
+                     :width='configs.index.width'
+                     :align='configs.index.align'>
     </el-table-column>
-    <el-table-column v-for='(item) in options.columns'
+    <el-table-column v-for='(item) in configs.columns'
                      :key='item.id'
                      :label='item.label'>
       <template slot-scope='scope'>
         <span>
           {{scope.row[item.prop]}}
         </span>
+        <el-input v-if="scope.row.editFlag"
+                  v-model="scope.row[item.prop]"
+                  @keyup.native="alert('asdasd')"></el-input>
+        <span v-else>
+          <span>{{scope.row[item.prop]}}</span>
+        </span>
       </template>
     </el-table-column>
 
-    <el-table-column :label='options.handle.label'
-                     :width='options.handle.width'
-                     :align='options.handle.align'>
+    <el-table-column :label='configs.handle.label'
+                     :width='configs.handle.width'
+                     :align='configs.handle.align'>
       <template slot-scope="scope">
-        <el-button v-for='(item) in options.handle.options'
+        <el-button v-for='(item) in configs.handle.options'
                    :key="item.id"
                    :type="item.type"
                    :size="item.size"
@@ -46,8 +52,7 @@
 export default {
   name: 'BaseTable',
   props: {
-    api:{type:Function},
-    options: {
+    configs: {
       type: Object,
       default () {
         return {
@@ -73,58 +78,26 @@ export default {
             show: true,
             label: '操作',
             options: [
-              {
-                type: 'primary',
-                label: '编辑f',
-                size: 'mini',
-                handle: (row) => {
-                  alert('编辑' + row.name)
-                }
-              },
-              {
-                type: 'danger',
-                label: '删除',
-                size: 'mini',
-                handle: (row) => {
-                  alert('删除' + row.name)
-                }
-              }
             ]
           },
           columns: [
-            { prop: 'date', label: '日期', width: 250, align: 'center' },
-            { prop: 'name', label: '名称', width: 250, align: 'center' },
-            { prop: 'address', label: '地址', width: 250, align: 'center' }
-          ],
-          tableData: [
-            {
-              date: '2016-05-02',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            },
-            {
-              date: '2016-05-04',
-              name: '王小龙',
-              address: '上海市普陀区金沙江路 1517 弄'
-            },
-            {
-              date: '2016-05-01',
-              name: '王小黑',
-              address: '上海市普陀区金沙江路 1519 弄'
-            },
-            {
-              date: '2016-05-03',
-              name: '王小豹',
-              address: '上海市普陀区金沙江路 1516 弄'
-            }
           ]
         }
+      }
+    },
+    tableData: {
+      type: Array,
+      default () {
+        return []
       }
     }
 
   },
   data () {
-    return {}
+    return {
+      // 编辑行的标识
+      editFlag: false
+    }
   },
   methods: {
     emitEventHandler (event) {
