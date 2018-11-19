@@ -1,6 +1,7 @@
 <!-- 模板 -->
 <template>
-  <vue-el-table :configs='configs'
+  <vue-el-table ref="vueElTable"
+                :configs='configs'
                 :values='values'></vue-el-table>
 </template>
 
@@ -11,8 +12,19 @@ export default {
   components: {
     VueElTable
   },
+  mounted () {
+    this.$nextTick(function () {
+      this.refVueElTable = this.$refs.vueElTable
+      this.refSearch = this.refVueElTable.$refSearch
+      this.refToolbar = this.refVueElTable.$refToolbar
+      this.refTable = this.refVueElTable.$refTable
+      this.refPagination = this.refVueElTable.$refPagination
+    })
+  },
   data () {
     return {
+      // 直接子组件对象
+      refVueElTable: {},
       configs: {
         // 搜索栏
         search: {
@@ -88,6 +100,18 @@ export default {
               type: 'danger',
               icon: 'el-icon-remove-outline',
               handle: () => { }
+            },
+            // 编辑全部按钮
+            editAll: {
+              labelEdit: '编辑所有',
+              labelSave: '保存所有',
+              both: true,
+              toggle: false,
+              disabled: false,
+              type: 'primary',
+              handle: () => {
+                this.handleEditAll()
+              }
             }
           }
         },
@@ -98,8 +122,8 @@ export default {
           size: 'medium',
           highlightCurrentRow: true,
 
-          // 是否支持行内编辑
-          inlineEditable: {},
+          // 行内编辑标识
+          editFlag: false,
 
           // 选择列
           selection: {
@@ -117,30 +141,36 @@ export default {
           },
           // 操作列
           handle: {
-            width: 230,
-            align: 'center',
-            show: true,
-            label: '操作'
-          },
-          // 编辑按钮
-          edit: {
-            label: '编辑',
-            disabled: false,
-            type: 'primary',
-            icon: 'el-icon-circle-plus-outline',
-            handle: (row) => {
-              if (inlineEditable) {
-                row.editFlag = true
+            size: 'small',
+            // 编辑按钮
+            header: {
+              width: 230,
+              align: 'center',
+              show: true,
+              label: '操作'
+            },
+            options: {
+              edit: {
+                labelEdit: '编辑',
+                labelSave: '保存',
+                both: true,
+                disabled: false,
+                type: 'primary',
+                icon: 'el-icon-circle-plus-outline',
+                handle: (row) => {
+                  debugger
+                  this.handleEdit(row)
+                }
+              },
+              // 删除按钮
+              delete: {
+                label: '删除',
+                disabled: false,
+                type: 'danger',
+                icon: 'el-icon-circle-plus-outline',
+                handle: () => { }
               }
             }
-          },
-          // 删除按钮
-          delete: {
-            label: '删除',
-            disabled: false,
-            type: 'primary',
-            icon: 'el-icon-circle-plus-outline',
-            handle: () => { }
           },
           // 数据列
           columns: [
@@ -194,7 +224,29 @@ export default {
   },
   methods: {
     handleSearch () {
+    },
+
+    // 编辑全部按钮
+    handleEditAll () {
       debugger
+      if (!this.refTable.configs.editFlag) {
+        this.refTable.configs.editFlag = true
+        this.refToolbar.configs.options.editAll.toggle = true
+      } else {
+        this.refTable.configs.editFlag = false
+        this.refToolbar.configs.options.editAll.toggle = false
+      }
+      console.log(this)
+    },
+
+    handleEdit (row) {
+      if (!row.editFlag) {
+        row.editFlag = true
+        //row.saveFlag = true
+      } else {
+        row.editFlag = false
+        //row.saveFlag = false
+      }
     }
   }
 }

@@ -21,10 +21,7 @@
                      :key='item.id'
                      :label='item.label'>
       <template slot-scope='scope'>
-        <span>
-          {{scope.row[item.prop]}}
-        </span>
-        <el-input v-if="scope.row.editFlag"
+        <el-input v-if="configs.editFlag"
                   v-model="scope.row[item.prop]"
                   @keyup.native="alert('asdasd')"></el-input>
         <span v-else>
@@ -33,15 +30,15 @@
       </template>
     </el-table-column>
 
-    <el-table-column :label='configs.handle.label'
-                     :width='configs.handle.width'
-                     :align='configs.handle.align'>
+    <el-table-column :label='configs.handle.header.label'
+                     :width='configs.handle.header.width'
+                     :align='configs.handle.header.align'>
       <template slot-scope="scope">
-        <el-button v-for='(item) in configs.handle.options'
-                   :key="item.id"
-                   :type="item.type"
-                   :size="item.size"
-                   @click="item.handle(scope.row)">{{ item.label }}
+        <el-button v-for='(val,key) in configs.handle.options'
+                   :key="key"
+                   :type="val.type"
+                   :size="configs.handle.size"
+                   @click="val.handle(scope.row)">{{!val.both?val.label:(!scope.row.editFlag?'编辑':'保存')}}
         </el-button>
       </template>
     </el-table-column>

@@ -32,7 +32,14 @@ export default {
     BaseTable,
     BaseSearch
   },
-
+  mounted () {
+    this.$nextTick(function () {
+      this.$refSearch = this.$refs.search
+      this.$refToolbar = this.$refs.toolbar
+      this.$refTable = this.$refs.table
+      this.$refPagination = this.$refs.pagination
+    })
+  },
   props: {
     // 配置类参数
     configs: {

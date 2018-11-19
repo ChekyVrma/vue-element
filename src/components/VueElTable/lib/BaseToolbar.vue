@@ -6,7 +6,7 @@
                :type='val.type'
                :icon='val.icon'
                :disabled='val.disabled'
-               @click='val.handle'>{{val.label}}
+               @click='val.handle'>{{!val.both?val.label:(!val.toggle?val.labelEdit:val.labelSave)}}
     </el-button>
   </el-row>
 </template>
@@ -25,10 +25,18 @@ export default {
 
   mounted () {
     this.distOptions = Object.assign(this.distOptions, this.configs.options)
+    // this.editFlag = this.$parent.$refTable.configs.editFlag
+  },
+
+  watch: {
+    $parent () {
+      // this.$parent.$refTable.configs.editFlag
+    }
   },
 
   data () {
     return {
+      // editFlag: fasle,
       distOptions: {
         add: {
           // 添加按钮
