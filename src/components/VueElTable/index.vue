@@ -6,7 +6,7 @@
     <!--工具栏-->
     <base-toolbar></base-toolbar>
     <!-- 数据栏 -->
-    <base-table @selectionChangeWatch="selectionChangeReceive"></base-table>
+    <base-table @selectionChangeWatch="selectionChangeReceive" :api="water.getWaterList"></base-table>
     <!-- 分页栏 -->
     <div class='pagination-container'>
       <base-pagination :options='paginationOptions'
@@ -20,7 +20,7 @@ import BasePagination from './lib/BasePagination'
 import BaseToolbar from './lib/BaseToolbar'
 import BaseTable from './lib/BaseTable'
 import BaseSearch from './lib/BaseSearch'
-
+import water from './commons/api/water'
 export default {
   name: 'VueElTable',
   components: {

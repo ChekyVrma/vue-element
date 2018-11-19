@@ -15,8 +15,9 @@
       ref="form"
       :model="values"
     >
-
-      <el-row v-for="(row, i) in layout" :key="i">
+    <div v-for="(row,i) in layout" :key="i">
+      <tip-title v-if="row.length==1&&row[0].type=='tip'" :title="row[0].title"></tip-title>
+      <el-row v-else>
         <el-col v-for="(field, j) in row" :key="j" :span="span(field)">
           <el-form-item 
             :prop="field['prop']"
@@ -28,26 +29,28 @@
             :show-message="field['show-message']"
             :inline-message="field['inline-message']"
             :size="field['size']"
-
-            v-if="field"
+            v-if="field&&field.type!='slot'"
           >
             <component 
               :is=" field.type +'-field'" 
               v-model="values[field.prop]" 
-              :options="field.options" 
+              :options="field" 
               :style="fieldStyle(field)"
             ></component>
 
           </el-form-item>
+          <div v-else v-html="field.render" :span="span(field)"></div>
         </el-col>
       </el-row>
+    </div>
+
     </el-form>
 
     <div class="form-btns" :style="btnsStyle">
       <el-button 
         v-for="button in buttons"
         :key="button['text']"
-        
+
         :size="button['size']"
         :type="button['type']"
         :plain="button['plain']"
@@ -105,12 +108,14 @@ export default {
 
     // 初始化values.key
     this.config.fields.forEach((field, i) => {
-      if (!field.prop) {
-        throw Error('field name 是必填的')
-      } else if (getValues[field.prop]) {
-        throw Error('field.prop: ' + field.prop + ' 重复')
-      } else {
-        getValues[field.prop] = ''
+      if(field.type!=='tip'&&field.type!=='slot'){
+        if (!field.prop) {
+          throw Error('field name 是必填的')
+        } else if (getValues[field.prop]) {
+          throw Error('field.prop: ' + field.prop + ' 重复')
+        } else {
+          getValues[field.prop] = ''
+        }
       }
       if(!field.type){
         field.type='input'
@@ -134,7 +139,6 @@ export default {
         setValues[key] = _value
       }
     })
-
     this.values =this.config.values //Object.assign(getValues, setValues)
   },
   // watch:{

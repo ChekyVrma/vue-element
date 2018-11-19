@@ -129,6 +129,11 @@ export default {
   methods: {
     emitEventHandler (event) {
       this.$emit(event, ...Array.from(arguments).slice(1))
+    },
+    getList(){
+      this.api(this.listQuery).then(res=>{
+        
+      })
     }
   }
 }
