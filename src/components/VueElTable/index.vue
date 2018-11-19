@@ -4,7 +4,8 @@
     <!--搜索栏-->
     <base-search></base-search>
     <!--工具栏-->
-    <base-toolbar></base-toolbar>
+    <base-toolbar ref="toolbar"
+                  :options='toolbarOptions'></base-toolbar>
     <!-- 数据栏 -->
     <base-table @selectionChangeWatch="selectionChangeReceive" :api="water.getWaterList"></base-table>
     <!-- 分页栏 -->
@@ -37,8 +38,17 @@ export default {
         total: 1 // 总页数
       },
 
-      toolbarOptions: [
-      ]
+      toolbarOptions: {
+        add: {
+          // 添加按钮
+          label: '添asd加',
+          show: true,
+          disabled: false,
+          type: 'primary',
+          icon: 'el-icon-circle-plus-outline',
+          handle: () => { this.handleAdd() }
+        }
+      }
     }
   },
   methods: {
@@ -49,7 +59,13 @@ export default {
     currentChangeReceive (val) { },
 
     // 当选择项发生变化时会触发该事件
-    selectionChangeReceive (selection) { }
+    selectionChangeReceive (selection) { },
+
+    handleAdd () {
+      debugger
+      alert('Asdasd')
+      this.$refs.toolbar.options = []
+    }
   }
 }
 </script>
