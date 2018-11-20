@@ -6,8 +6,10 @@
                  :configs='configs.search'
                  :searchData='values.searchData'></base-search>
     <!--工具栏-->
-    <base-toolbar ref="toolbar"
-                  :configs='configs.toolbar'></base-toolbar>
+    <div class='toolbar-container'>
+      <base-toolbar ref="toolbar"
+                    :configs='configs.toolbar'></base-toolbar>
+    </div>
     <!-- 数据栏 -->
     <base-table ref="table"
                 :configs='configs.table'
@@ -88,7 +90,14 @@ export default {
 <style lang="stylus" scoped>
 .app-container {
   .pagination-container {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
     text-align: center;
+  }
+
+  .toolbar-container {
+    margin-bottom: 10px;
   }
 }
 </style>

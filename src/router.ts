@@ -23,7 +23,7 @@ export default new Router({
       component: () => import('./components/VueElTab/index.vue')
     },
     {
-      path: '/test/vue-el-tab',
+      path: '/test/vue-el-table',
       name: 'TestVueElTable',
       component: () => import('./views/test/TestVueElTable.vue')
     }

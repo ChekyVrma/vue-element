@@ -28,23 +28,36 @@ export default {
       configs: {
         // 搜索栏
         search: {
-          // 搜索按钮
-          search: {
-            type: 'primary',
-            icon: 'el-icon-search',
-            label: '搜索',
-            handle: () => {
-              debugger
-              this.handleSearch()
+          buttons: {
+            // 搜索按钮
+            search: {
+              type: 'primary',
+              icon: 'el-icon-search',
+              label: '搜索',
+              handle: () => {
+                debugger
+                this.handleSearch()
+              }
+            },
+            // 重置按钮
+            reset: {
+              type: 'primary',
+              icon: 'el-icon-refresh',
+              label: '重置',
+              handle: () => { }
+            },
+            // 重置按钮
+            open: {
+              type: 'primary',
+              icon: 'el-icon-refresh',
+              label: '展开',
+              handle: () => {
+                this.handleOpen()
+              }
             }
           },
-          // 重置按钮
-          reset: {
-            type: 'primary',
-            icon: 'el-icon-refresh',
-            label: '重置',
-            handle: () => { }
-          },
+          multiply: true,
+          showMultiply: false,
           // 表单项
           forms: [
             {
@@ -75,6 +88,76 @@ export default {
             },
             {
               label: '日期',
+              type: 'date',
+              prop: 'startDate',
+              placeholder: '选择日期',
+              pickerOptions: () => { handlePickerOptions() }
+            }
+          ],
+          forms1: [
+            {
+              label: '用户',
+              type: 'input',
+              prop: 'name',
+              placeholder: ''
+            },
+            {
+              label: '部门',
+              type: 'select',
+              prop: 'department',
+              placeholder: '全部',
+              valueKey: 'id',
+              labelKey: 'name',
+              options: [
+                {
+                  id: 1,
+                  name: '部门1'
+                }, {
+                  id: 2,
+                  name: '部门2'
+                }, {
+                  id: 2,
+                  name: '部门2'
+                }
+              ]
+            },
+            {
+              label: '日期',
+              type: 'date',
+              prop: 'startDate',
+              placeholder: '选择日期',
+              pickerOptions: () => { handlePickerOptions() }
+            }
+          ],
+          forms2: [
+            {
+              label: '用户2',
+              type: 'input',
+              prop: 'name',
+              placeholder: ''
+            },
+            {
+              label: '部门2',
+              type: 'select',
+              prop: 'department',
+              placeholder: '全部',
+              valueKey: 'id',
+              labelKey: 'name',
+              options: [
+                {
+                  id: 1,
+                  name: '部门1'
+                }, {
+                  id: 2,
+                  name: '部门2'
+                }, {
+                  id: 2,
+                  name: '部门2'
+                }
+              ]
+            },
+            {
+              label: '日期2',
               type: 'date',
               prop: 'startDate',
               placeholder: '选择日期',
@@ -223,6 +306,15 @@ export default {
     }
   },
   methods: {
+    // 展开按钮
+    handleOpen () {
+      if (!this.refSearch.configs.showMultiply) {
+        this.refSearch.configs.showMultiply = true
+      } else {
+        this.refSearch.configs.showMultiply = false
+      }
+    },
+
     handleSearch () {
     },
 
@@ -236,7 +328,6 @@ export default {
         this.values.tableData.map(item => {
           item.editFlag = false
         })
-
       } else {
         this.refTable.configs.editFlag = true
         this.refToolbar.configs.options.editAll.toggle = true
