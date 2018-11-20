@@ -21,7 +21,7 @@
                      :key='item.id'
                      :label='item.label'>
       <template slot-scope='scope'>
-        <el-input v-if="configs.editFlag"
+        <el-input v-if="scope.row.editFlag"
                   v-model="scope.row[item.prop]"
                   @keyup.native="alert('asdasd')"></el-input>
         <span v-else>

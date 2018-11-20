@@ -229,23 +229,35 @@ export default {
     // 编辑全部按钮
     handleEditAll () {
       debugger
-      if (!this.refTable.configs.editFlag) {
-        this.refTable.configs.editFlag = true
-        this.refToolbar.configs.options.editAll.toggle = true
-      } else {
+      if (this.refTable.configs.editFlag) {
         this.refTable.configs.editFlag = false
         this.refToolbar.configs.options.editAll.toggle = false
+
+        this.values.tableData.map(item => {
+          item.editFlag = false
+        })
+
+      } else {
+        this.refTable.configs.editFlag = true
+        this.refToolbar.configs.options.editAll.toggle = true
+
+        this.values.tableData.map(item => {
+          item.editFlag = true
+        })
       }
       console.log(this)
+
+      this.flushList()
     },
 
     handleEdit (row) {
+      debugger
       if (!row.editFlag) {
         row.editFlag = true
-        //row.saveFlag = true
+        // row.saveFlag = true
       } else {
         row.editFlag = false
-        //row.saveFlag = false
+        // row.saveFlag = false
       }
     }
   }
